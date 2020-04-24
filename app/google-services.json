@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "802238393560",
+    "firebase_url": "https://merakisan-544c8.firebaseio.com",
+    "project_id": "merakisan-544c8",
+    "storage_bucket": "merakisan-544c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802238393560:android:c3185b2bbee93bfde5bbad",
+        "android_client_info": {
+          "package_name": "com.example.merakissan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802238393560-0v0i4kp8hn3ufan1cinmeikf6pc2m9ec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.merakissan",
+            "certificate_hash": "a3a80d142d3ce9552ec6120678384f46d0728a85"
+          }
+        },
+        {
+          "client_id": "802238393560-eilor4ar1dblsmg063qq2rjg5ummrm19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEfAicwTHYjDDyU3KuGgtbIv57C0l4bY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802238393560-eilor4ar1dblsmg063qq2rjg5ummrm19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

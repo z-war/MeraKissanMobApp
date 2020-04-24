@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpUser">
+
+    <RelativeLayout
+        android:id="@+id/logoRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logoIV"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="3dp"
+            android:src="@drawable/mainlogo" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoIV"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/formRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/logoRL"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/nameLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/firstNameET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_backgroud"
+                android:hint="First Name"
+                android:nextFocusDown="@id/lastNameET"/>
+
+            <EditText
+                android:nextFocusDown="@id/emailET"
+                android:layout_marginStart="5dp"
+                android:id="@+id/lastNameET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/firstNameET"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_backgroud"
+                android:padding="10dp"
+                android:hint="Last Name" />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:nextFocusDown="@id/passwordET"
+            android:layout_marginTop="10dp"
+            android:id="@+id/emailET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameLL"
+            android:background="@drawable/edit_text_backgroud"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"></EditText>
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailET"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_backgroud"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"
+
+            android:nextFocusDown="@id/signupBTN"
+            ></EditText>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/signupBTN"
+            android:text="Sign Up"
+            android:layout_below="@id/passwordET"
+            android:background="@drawable/button_background"/>
+
+    </RelativeLayout>
+</RelativeLayout>
