@@ -3,6 +3,8 @@
 <item
     android:id="@+id/show_orders"
     android:title="Show Orders"></item>
+    <item android:id="@+id/update_user_details"
+        android:title="Update Details"/>
     <item
         android:id="@+id/log_out"
         android:title="Signout"></item>

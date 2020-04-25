@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.merakissan.Fragments.Update_Information_Fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +45,7 @@ public class Home_Screen extends AppCompatActivity {
     private FirebaseFirestore db;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
+    private Fragment update_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +57,16 @@ init();
     private void init()
     {
         try {
+            update_info = new Update_Information_Fragment();
             navigationView = findViewById(R.id.design_navigation_view);
             drawerLayout = findViewById(R.id.drawer_layout);
             header_view = navigationView.getHeaderView(0);
             toolbar = findViewById(R.id.toolbar);
             user_email = header_view.findViewById(R.id.user_emailTV_header);
             user_name =header_view.findViewById(R.id.user_nameTV_header);
+            profile_pic = header_view.findViewById(R.id.user_profile_picIV_header);
+
+
             muath = FirebaseAuth.getInstance();
             db =FirebaseFirestore.getInstance();
 
@@ -73,6 +82,12 @@ init();
                         if(item.getItemId() == R.id.show_orders)
                         {
                             closedrawer();
+                        }
+                        else if(item.getItemId() == R.id.update_user_details)
+                        {
+                            closedrawer();
+                            changefrag(update_info);
+                            return true;
                         }
                     return false;
                 }
@@ -100,6 +115,10 @@ init();
                                 name+=" ";
                                 name+= doc.getString("last_name");
                                 user_name.setText(name);
+                                if(!doc.getString("imageuri").isEmpty())
+                                {
+                                    Glide.with(getApplicationContext()).load(doc.getString("imageuri")).into(profile_pic);
+                                }
                             }
                 }
             }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -136,6 +155,17 @@ init();
         }catch (Exception e)
         {
             Toast.makeText(this, "Error Closing Drawer"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void changefrag(Fragment obj)
+    {
+        try {
+            FragmentTransaction fragmentTransaction =getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_holder,obj).commit();
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "Error Changing fragment"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

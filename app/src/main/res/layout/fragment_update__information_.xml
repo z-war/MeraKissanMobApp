@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Update_Information_Fragment">
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+
+        android:id="@+id/formRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:padding="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_infoTV"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:text="Update Informaton"/>
+
+        <LinearLayout
+            android:layout_below="@id/edit_infoTV"
+            android:id="@+id/nameLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/firstNameET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@drawable/edit_text_backgroud"
+                android:hint="First Name"
+                android:nextFocusDown="@id/lastNameET"/>
+
+            <EditText
+                android:nextFocusDown="@id/emailET"
+                android:layout_marginStart="5dp"
+
+                android:id="@+id/lastNameET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/firstNameET"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_backgroud"
+                android:padding="10dp"
+                android:hint="Last Name" />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:nextFocusDown="@id/passwordET"
+            android:layout_marginTop="10dp"
+            android:id="@+id/emailET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameLL"
+            android:background="@drawable/edit_text_backgroud"
+            android:hint="Email"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"></EditText>
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailET"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_backgroud"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"
+
+            android:nextFocusDown="@id/phoneET"
+            ></EditText>
+        <EditText
+            android:id="@+id/phoneET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordET"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_backgroud"
+            android:hint="Phone No"
+            android:inputType="phone"
+            android:paddingLeft="15dp"
+            android:textSize="25sp"
+
+            android:nextFocusDown="@id/IV"
+            ></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upload_imageTV"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:layout_below="@id/phoneET"
+            android:text="Select Image"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:nextFocusDown="@id/update_infoBTN"
+            android:layout_height="200dp"
+            android:id="@+id/IV"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/upload_imageTV"
+            android:src="@drawable/temp_profile_pic"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/update_infoBTN"
+            android:text="Update Info"
+            android:layout_below="@id/IV"
+            android:background="@drawable/button_background"/>
+
+    </RelativeLayout>
+</FrameLayout>
