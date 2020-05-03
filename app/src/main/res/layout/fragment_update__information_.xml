@@ -35,14 +35,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
+                android:inputType="textPersonName"
                 android:background="@drawable/edit_text_backgroud"
                 android:hint="First Name"
                 android:nextFocusDown="@id/lastNameET"/>
 
             <EditText
-                android:nextFocusDown="@id/emailET"
+                android:nextFocusDown="@id/phoneET"
                 android:layout_marginStart="5dp"
-
+                android:inputType="textPersonName"
                 android:id="@+id/lastNameET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
         </LinearLayout>
 
         <EditText
-            android:nextFocusDown="@id/passwordET"
+
             android:layout_marginTop="10dp"
             android:id="@+id/emailET"
             android:layout_width="match_parent"
@@ -82,7 +83,7 @@
             android:paddingLeft="15dp"
             android:textSize="25sp"
 
-            android:nextFocusDown="@id/phoneET"
+
             ></EditText>
         <EditText
             android:id="@+id/phoneET"

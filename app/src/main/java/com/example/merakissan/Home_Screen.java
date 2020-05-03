@@ -77,6 +77,7 @@ init();
                     {
                         closedrawer();
                         muath.signOut();
+                        finish();
                         startActivity(new Intent(getBaseContext(),MainActivity.class));
                     }else
                         if(item.getItemId() == R.id.show_orders)
@@ -110,6 +111,7 @@ init();
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful())
                             {
+
                                 DocumentSnapshot  doc = task.getResult();
                                 String name = doc.getString("first_name");
                                 name+=" ";

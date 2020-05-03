@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,7 +22,8 @@ import com.google.gson.internal.$Gson$Preconditions;
 
 public class MainActivity extends AppCompatActivity {
    private EditText email , password;
-   private Button login , tosignup;
+   private Button login ;
+    TextView tosignup;
    FirebaseFirestore db;
    FirebaseAuth mAuth;
    Dialog dialog;
@@ -43,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
             password =findViewById(R.id.passwordET);
             login = findViewById(R.id.loginBTN);
             tosignup = findViewById(R.id.tosignupactivityBTN);
+            String text = "<font color='black'>Not a User Sign Up Please </font><font color='red'> Sign Up!</font>";
+            tosignup.setText(Html.fromHtml(text) , TextView.BufferType.SPANNABLE);
             tosignup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    finish();
                     startActivity(new Intent(getBaseContext(),SignUpUser.class));
                 }
             });

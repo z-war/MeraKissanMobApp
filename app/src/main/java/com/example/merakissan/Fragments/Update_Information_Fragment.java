@@ -59,6 +59,7 @@ public class Update_Information_Fragment extends Fragment {
     private Boolean isimageselected = false;
     private Uri objecturi;
     private Dialog dialog;
+
     public Update_Information_Fragment() {
         // Required empty public constructor
     }
@@ -93,23 +94,20 @@ public class Update_Information_Fragment extends Fragment {
             db.collection("Users").document(curuser.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
-                        first_name.setText( doc.getString("first_name"));
+                        first_name.setText(doc.getString("first_name"));
                         last_name.setText(doc.getString("last_name"));
                         password.setText(doc.getString("password"));
-                        if(!doc.getString("phone").isEmpty())
-                        {
+                        if (!doc.getString("phone").isEmpty()) {
                             phone.setText(doc.getString("phone"));
                         }
-                        if(!doc.getString("imageuri").isEmpty())
-                        {
+                        if (!doc.getString("imageuri").isEmpty()) {
                             String url = doc.getString("imageuri");
-                            Toast.makeText(getContext(), "Image found"+url, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Image found" + url, Toast.LENGTH_LONG).show();
                             Glide.with(getActivity().getBaseContext()).load(url).into(profile_pic);
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getContext(), "No Image Found", Toast.LENGTH_SHORT).show();
                         }
 
@@ -125,7 +123,7 @@ public class Update_Information_Fragment extends Fragment {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "Eror"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Eror" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -165,47 +163,39 @@ public class Update_Information_Fragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == req_code &&resultCode== RESULT_OK && data!=null)
-        {
+        if (requestCode == req_code && resultCode == RESULT_OK && data != null) {
             objecturi = data.getData();
-            if(objecturi!=null)
-            {
+            if (objecturi != null) {
                 try {
-                     Bitmap objectBitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),objecturi);
-                        profile_pic.setImageBitmap(objectBitmap);
-                        isimageselected =true;
-                }catch (Exception e)
-                {
-                    Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Bitmap objectBitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), objecturi);
+                    profile_pic.setImageBitmap(objectBitmap);
+                    isimageselected = true;
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }else
-            {
+            } else {
                 Toast.makeText(getContext(), "No Data in URi Object ", Toast.LENGTH_SHORT).show();
             }
-        }else
-        {
+        } else {
             Toast.makeText(getContext(), "No Image Selected", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    private void update_user_details()
-    {
+    private void update_user_details() {
         try {
-            final Map<String , Object> datamap = new HashMap<>();
-            datamap.put("first_name",first_name.getText().toString());
-            datamap.put("last_name",last_name.getText().toString());
-            datamap.put("phone",phone.getText().toString());
-            if(isimageselected)
-            {
-                String imagename = curuser.getEmail()+" "+getextention(objecturi);
-                final StorageReference ref  = mStorageRef.child(imagename);
+            final Map<String, Object> datamap = new HashMap<>();
+            datamap.put("first_name", first_name.getText().toString());
+            datamap.put("last_name", last_name.getText().toString());
+            datamap.put("phone", phone.getText().toString());
+            if (isimageselected) {
+                String imagename = curuser.getEmail() + " " + getextention(objecturi);
+                final StorageReference ref = mStorageRef.child(imagename);
                 UploadTask task = ref.putFile(objecturi);
                 task.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful())
-                        {
+                        if (!task.isSuccessful()) {
                             dialog.dismiss();
                             Toast.makeText(getContext(), "Uploading Image Not success", Toast.LENGTH_LONG).show();
                             throw task.getException();
@@ -216,13 +206,12 @@ public class Update_Information_Fragment extends Fragment {
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
 
-                            datamap.put("imageuri",task.getResult().toString());
-                            datamap.put("password",password.getText().toString());
+                            datamap.put("imageuri", task.getResult().toString());
+                            datamap.put("password", password.getText().toString());
 
-                            db.collection("Users").document(curuser.getEmail()).set(datamap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            db.collection("Users").document(curuser.getEmail()).update(datamap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     dialog.dismiss();
@@ -232,57 +221,54 @@ public class Update_Information_Fragment extends Fragment {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     dialog.dismiss();
-                                    Toast.makeText(getContext(), "Error Uploading Detials"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Error Uploading Detials" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                            }); }
-                        else{
-                            datamap.put("imageuri","");
-                            datamap.put("password",password.getText().toString());
+                            });
+                        }
 
-                            db.collection("Users").document(curuser.getEmail()).set(datamap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    dialog.dismiss();
-                                    Toast.makeText(getContext(), "User Details Uploaded Succesfully", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    dialog.dismiss();
-                                    Toast.makeText(getContext(), "Error Uploading Detials"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });}
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         dialog.dismiss();
-                        Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
 
-            }
-            else {
-                dialog.dismiss();
-                Toast.makeText(getContext(), "No Image Seleted", Toast.LENGTH_SHORT).show();
+            } else {
+
+
+
+
+                db.collection("Users").document(curuser.getEmail()).update(datamap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "User Details Uploaded Succesfully With Out New Profile Pic", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "Error Uploading Detials" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
-        }catch (Exception e)
-        {   dialog.dismiss();
-            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            dialog.dismiss();
+            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     private String getextention(Uri objecturi) {
-        try{
+        try {
             ContentResolver contentResolver = getActivity().getApplicationContext().getContentResolver();
             MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-            String  ex  = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(objecturi));
+            String ex = mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(objecturi));
             return ex;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
 

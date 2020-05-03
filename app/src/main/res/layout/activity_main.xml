@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,7 +44,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/edit_text_backgroud"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
@@ -57,7 +57,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/edit_text_backgroud"
             android:hint="Pasword"
             android:inputType="textPassword"
             android:padding="10dp"
@@ -72,26 +71,29 @@
             android:background="@drawable/button_background"
             android:text="Login" android:layout_margin="10dp" />
 
+
         <TextView
-            android:id="@+id/movetosignupTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loginBTN"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-
-            android:text="Not a User Sign Up Please !"
-            android:textSize="25sp" />
-
-        <Button
             android:id="@+id/tosignupactivityBTN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/movetosignupTV"
-            android:background="@drawable/button_background"
-            android:text="Sign Up"
+            android:layout_below="@id/loginBTN"
+            android:textSize="22sp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:text=""
             android:layout_margin="10dp"/>
 
     </RelativeLayout>
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/formRL">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="70dp"
+            android:layout_marginBottom="0dp"
+            android:src="@drawable/ic_login_mera_kisan_waves"/>
+    </RelativeLayout>
 </RelativeLayout>

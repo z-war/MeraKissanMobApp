@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class SignUpUser extends AppCompatActivity {
     private EditText first_name, last_name, email, password;
     private Button signup;
+    private TextView tologinact;
     FirebaseAuth muath;
     FirebaseFirestore db;
     Dialog dialog;
@@ -47,6 +50,7 @@ public class SignUpUser extends AppCompatActivity {
             signup = findViewById(R.id.signupBTN);
             muath = FirebaseAuth.getInstance();
             db = FirebaseFirestore.getInstance();
+            tologinact = findViewById(R.id.tologinactivity);
             dialog = new Dialog(this);
             dialog.setContentView(R.layout.please_wait_dialog_box);
             dialog.setCancelable(false);
@@ -55,6 +59,15 @@ public class SignUpUser extends AppCompatActivity {
                 public void onClick(View v) {
                     dialog.show();
                     setSignup();
+                }
+            });
+            String text = "<font color='black'>Already a Member </font><font color='red'>Login Here!</font>";
+            tologinact.setText(Html.fromHtml(text),TextView.BufferType.SPANNABLE);
+            tologinact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    startActivity(new Intent(getBaseContext() , MainActivity.class));
                 }
             });
         } catch (Exception e) {
