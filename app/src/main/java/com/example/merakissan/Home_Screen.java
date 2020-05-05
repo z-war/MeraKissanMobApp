@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.merakissan.Fragments.Update_Information_Fragment;
+import com.example.merakissan.Fragments.sell_fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,8 +38,8 @@ public class Home_Screen extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private View header_view;
-    private ImageView profile_pic;
-    private TextView user_email;
+    private ImageView profile_pic , cattleIV , tractorIV;
+    private TextView user_email , cattleTV , tractorTV;
     private TextView user_name;
     private FirebaseAuth muath;
     private FirebaseUser curUser;
@@ -46,16 +47,16 @@ public class Home_Screen extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar toolbar;
     private Fragment update_info;
+    private Fragment sell_frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__screen);
-init();
+        init();
     }
 
-    private void init()
-    {
+    private void init() {
         try {
             update_info = new Update_Information_Fragment();
             navigationView = findViewById(R.id.design_navigation_view);
@@ -63,33 +64,45 @@ init();
             header_view = navigationView.getHeaderView(0);
             toolbar = findViewById(R.id.toolbar);
             user_email = header_view.findViewById(R.id.user_emailTV_header);
-            user_name =header_view.findViewById(R.id.user_nameTV_header);
+            user_name = header_view.findViewById(R.id.user_nameTV_header);
             profile_pic = header_view.findViewById(R.id.user_profile_picIV_header);
-
+            toolbar.setTitle(R.string.app_name);
+            sell_frag = new sell_fragment();
 
             muath = FirebaseAuth.getInstance();
-            db =FirebaseFirestore.getInstance();
+            db = FirebaseFirestore.getInstance();
 
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    if(item.getItemId() == R.id.log_out)
-                    {
+                    if (item.getItemId() == R.id.log_out) {
                         closedrawer();
                         muath.signOut();
                         finish();
-                        startActivity(new Intent(getBaseContext(),MainActivity.class));
-                    }else
-                        if(item.getItemId() == R.id.show_orders)
-                        {
-                            closedrawer();
-                        }
-                        else if(item.getItemId() == R.id.update_user_details)
-                        {
-                            closedrawer();
-                            changefrag(update_info);
-                            return true;
-                        }
+                        startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    } else if (item.getItemId() == R.id.show_orders) {
+                        closedrawer();
+                    } else if (item.getItemId() == R.id.update_user_details) {
+                        closedrawer();
+
+                        changefrag(update_info);
+
+                        return true;
+                    }else if(item.getItemId() == R.id.home_screen)
+                    {
+                        closedrawer();
+
+                        startActivity(new Intent(getBaseContext(),Home_Screen.class));
+                        finish();
+                        return true;
+                    }
+                    else if(item.getItemId() == R.id.sell_screen)
+                    {
+                        closedrawer();
+
+                        changefrag(sell_frag);
+                        return true;
+                    }
                     return false;
                 }
             });
@@ -100,28 +113,25 @@ init();
         }
     }
 
-    private void setcurrentuserdetails()
-    {
+    private void setcurrentuserdetails() {
         try {
             curUser = muath.getCurrentUser();
             user_email.setText(curUser.getEmail());
-            DocumentReference ref =  db.collection("Users").document(curUser.getEmail());
+            DocumentReference ref = db.collection("Users").document(curUser.getEmail());
             ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful())
-                            {
+                    if (task.isSuccessful()) {
 
-                                DocumentSnapshot  doc = task.getResult();
-                                String name = doc.getString("first_name");
-                                name+=" ";
-                                name+= doc.getString("last_name");
-                                user_name.setText(name);
-                                if(!doc.getString("imageuri").isEmpty())
-                                {
-                                    Glide.with(getApplicationContext()).load(doc.getString("imageuri")).into(profile_pic);
-                                }
-                            }
+                        DocumentSnapshot doc = task.getResult();
+                        String name = doc.getString("first_name");
+                        name += " ";
+                        name += doc.getString("last_name");
+                        user_name.setText(name);
+                        if (!doc.getString("imageuri").isEmpty()) {
+                            Glide.with(getApplicationContext()).load(doc.getString("imageuri")).into(profile_pic);
+                        }
+                    }
                 }
             }).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
@@ -131,43 +141,38 @@ init();
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Home_Screen.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home_Screen.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }catch (Exception e)
-        {
-            Toast.makeText(this, "Setting User Details "+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void setuphamburgericon()
-    {
-        try {
-            actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,(R.string.open),(R.string.close));
-            actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimaryDark));
-            actionBarDrawerToggle.syncState();
-        }catch (Exception e)
-        {
-            Toast.makeText(this, "Error Setting Up Hamburger ICon"+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void closedrawer()
-    {
-        try {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }catch (Exception e)
-        {
-            Toast.makeText(this, "Error Closing Drawer"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Setting User Details " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void changefrag(Fragment obj)
-    {
+    private void setuphamburgericon() {
         try {
-            FragmentTransaction fragmentTransaction =getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_holder,obj).commit();
-        }catch (Exception e)
-        {
-            Toast.makeText(this, "Error Changing fragment"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, (R.string.open), (R.string.close));
+            actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimaryDark));
+            actionBarDrawerToggle.syncState();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error Setting Up Hamburger ICon" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void closedrawer() {
+        try {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error Closing Drawer" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void changefrag(Fragment obj) {
+        try {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_holder, obj).commit();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error Changing fragment" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

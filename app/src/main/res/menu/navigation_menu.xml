@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/show_orders"
-    android:title="Show Orders"></item>
+    <item android:id="@+id/home_screen"
+        android:title="@string/home"/>
+    <item android:id="@+id/sell_screen"
+        android:title="@string/offer_for_sale"/>
     <item android:id="@+id/update_user_details"
-        android:title="Update Details"/>
+        android:title="@string/update_details"/>
+    <item
+        android:id="@+id/show_orders"
+        android:title="@string/show_orders"></item>
     <item
         android:id="@+id/log_out"
-        android:title="Signout"></item>
+        android:title="@string/signout"></item>
 </menu>

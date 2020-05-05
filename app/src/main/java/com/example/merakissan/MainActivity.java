@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                             dialog.dismiss();
                             Toast.makeText(MainActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                            finish();
                             startActivity(new Intent(getBaseContext(),Home_Screen.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
