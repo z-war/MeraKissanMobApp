@@ -5,22 +5,112 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.sell_fragment">
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bodyRL"
+        android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/title1"
             android:text="@string/product_details"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/p_t_TV"
+            android:layout_below="@id/title1"
+            android:textSize="22sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/product_type"/>
         <Spinner
+            android:autofillHints="@string/product_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/product_type"
-            android:layout_below="@id/title1"
+            android:layout_below="@id/p_t_TV"
             android:spinnerMode="dropdown"
-            android:background="@drawable/button_background"/>
+            android:nextFocusDown="@id/product_category"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/p_c_TV"
+            android:layout_below="@id/product_type"
+            android:textSize="22sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/select_product_category"/>
+        <Spinner
+            android:autofillHints="@string/product_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_category"
+            android:layout_below="@id/p_c_TV"
+            android:spinnerMode="dropdown"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:nextFocusDown="@id/prod_title"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prod_title"
+            android:inputType="text"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/product_category"
+            android:hint="Title"
+            android:nextFocusDown="@id/prod_description"/>
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prod_description"
+            android:hint="Description"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/prod_title"
+            android:nextFocusDown="@id/prod_pric"/>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prod_pric"
+            android:hint="Price (Rs)"
+            android:inputType="number"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/prod_description"
+            android:nextFocusDown="@id/product_image"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/image_info_TV"
+            android:layout_below="@id/prod_pric"
+            android:text="Please Select Image Of Your Product"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/product_image"
+            android:layout_below="@id/image_info_TV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/tractor_icon"
+            />
+    </RelativeLayout>
 
 
 </FrameLayout>

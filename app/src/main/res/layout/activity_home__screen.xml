@@ -55,7 +55,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:id="@+id/cow_ic_IV"
-                            android:contentDescription="@string/app_name"
+                            android:contentDescription="@string/livestock"
                             android:src="@drawable/cow_icon">
 
                         </ImageView>
@@ -66,7 +66,7 @@
                             android:layout_below="@id/cow_ic_IV"
                             android:textSize="25sp"
                             android:gravity="center"
-                            android:text="@string/cattle"></TextView>
+                            android:text="@string/livestock"></TextView>
                     </RelativeLayout>
                     <RelativeLayout
 
