@@ -135,6 +135,25 @@ public class sell_fragment extends Fragment {
 
                 }
             });
+            Dropdown_cat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(product_type=="LiveStock")
+                    {
+                        product_catogary = items_cattle[position];
+
+                    }else if(product_type=="Equipment")
+                    {
+                        product_catogary = items_equipment[position];
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         } catch (Exception e) {
             Toast.makeText(getContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.merakissan.Fragments.Update_Information_Fragment;
 import com.example.merakissan.Fragments.sell_fragment;
+import com.example.merakissan.Fragments.show_products;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +49,7 @@ public class Home_Screen extends AppCompatActivity {
     private Toolbar toolbar;
     private Fragment update_info;
     private Fragment sell_frag;
-
+    private Fragment show_products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class Home_Screen extends AppCompatActivity {
             profile_pic = header_view.findViewById(R.id.user_profile_picIV_header);
             toolbar.setTitle(R.string.app_name);
             sell_frag = new sell_fragment();
-
+            show_products = new show_products();
             muath = FirebaseAuth.getInstance();
             db = FirebaseFirestore.getInstance();
 
@@ -80,8 +81,9 @@ public class Home_Screen extends AppCompatActivity {
                         muath.signOut();
                         finish();
                         startActivity(new Intent(getBaseContext(), MainActivity.class));
-                    } else if (item.getItemId() == R.id.show_orders) {
+                    } else if (item.getItemId() == R.id.show_products) {
                         closedrawer();
+                        changefrag(show_products);
                     } else if (item.getItemId() == R.id.update_user_details) {
                         closedrawer();
 
