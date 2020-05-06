@@ -16,4 +16,5 @@
     <string name="product_type">Select Product Type</string>
     <string name="livestock">Livestock</string>
     <string name="select_product_category">Select product category</string>
+    <string name="add_product">Add Product</string>
 </resources>
