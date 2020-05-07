@@ -90,6 +90,7 @@ public class SignUpUser extends AppCompatActivity {
                             mydatamap.put("password", password.getText().toString());
                             mydatamap.put("phone","");
                             mydatamap.put("imageuri","");
+                            mydatamap.put("address","");
                             db.collection("Users").document(email.getText().toString()).set(mydatamap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

@@ -51,7 +51,7 @@ public class Update_Information_Fragment extends Fragment {
     private final static int req_code = 12;
     private StorageReference mStorageRef;
     private FirebaseFirestore db;
-    private EditText first_name, last_name, password, email, phone;
+    private EditText first_name, last_name, password, email, phone ,address;
     private ImageView profile_pic;
     private Button updateBTN;
     private FirebaseAuth mauth;
@@ -81,6 +81,7 @@ public class Update_Information_Fragment extends Fragment {
             email = frag.findViewById(R.id.emailET);
             password = frag.findViewById(R.id.passwordET);
             phone = frag.findViewById(R.id.phoneET);
+            address = frag.findViewById(R.id.AddressET);
             profile_pic = frag.findViewById(R.id.IV);
             updateBTN = frag.findViewById(R.id.update_infoBTN);
             mStorageRef = FirebaseStorage.getInstance().getReference("Images");
@@ -188,6 +189,7 @@ public class Update_Information_Fragment extends Fragment {
             datamap.put("first_name", first_name.getText().toString());
             datamap.put("last_name", last_name.getText().toString());
             datamap.put("phone", phone.getText().toString());
+            datamap.put("address",address.getText().toString());
             if (isimageselected) {
                 String imagename = curuser.getEmail() + " " + getextention(objecturi);
                 final StorageReference ref = mStorageRef.child(imagename);
@@ -209,7 +211,6 @@ public class Update_Information_Fragment extends Fragment {
                         if (task.isSuccessful()) {
 
                             datamap.put("imageuri", task.getResult().toString());
-                            datamap.put("password", password.getText().toString());
 
                             db.collection("Users").document(curuser.getEmail()).update(datamap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

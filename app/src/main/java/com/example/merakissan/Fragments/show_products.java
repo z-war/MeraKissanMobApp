@@ -17,6 +17,7 @@ import com.example.merakissan.Adapters.ShowProductAdapter;
 import com.example.merakissan.Models.Product;
 import com.example.merakissan.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -25,7 +26,7 @@ public class show_products extends Fragment {
     private ShowProductAdapter showProductAdapter;
     private FirebaseFirestore db;
     private View frag;
-
+    private Fragment confirmOrder;
     public show_products() {
         // Required empty public constructor
     }
@@ -44,8 +45,9 @@ public class show_products extends Fragment {
         try {
             db = FirebaseFirestore.getInstance();
             recyclerView = frag.findViewById(R.id.show_productsRV);
+            confirmOrder = new Confirm_order();
             Fill_RecyclerView();
-            Toast.makeText(getActivity(), "After fill called" , Toast.LENGTH_SHORT).show();
+
 
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -62,8 +64,23 @@ public class show_products extends Fragment {
             showProductAdapter = new ShowProductAdapter(options);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(showProductAdapter);
-            Toast.makeText(getActivity(), "After Products Loaded" , Toast.LENGTH_SHORT).show();
+            showProductAdapter.setOnItemClickListner(new ShowProductAdapter.OnItemClickListner() {
+                @Override
+                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                    Product product = documentSnapshot.toObject(Product.class);
+                    String id = documentSnapshot.getId();
+                    Bundle product_data = new Bundle();
+                    product_data.putString("Email" , product.getCreatedBy());
+                    product_data.putString("Price" , Integer.toString(product.getProductPrice()));
+                    product_data.putString("ImageUri" , product.getImageUri());
+                    product_data.putString("Title",product.getProductTitle());
+                    product_data.putString("Description",product.getProductDescription());
+                    product_data.putString("ProductId" , id);
+                    confirmOrder.setArguments(product_data);
 
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_holder,confirmOrder).commit();
+                }
+            });
         }catch (Exception e)
         {
             Toast.makeText(getActivity(), "error loading items in recycler view"+e.getMessage(), Toast.LENGTH_SHORT).show();

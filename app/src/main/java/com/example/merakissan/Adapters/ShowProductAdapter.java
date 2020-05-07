@@ -15,12 +15,13 @@ import com.example.merakissan.Models.Product;
 import com.example.merakissan.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ShowProductAdapter extends FirestoreRecyclerAdapter<Product, ShowProductAdapter.AppViewHolder> {
-
+    private OnItemClickListner listner;
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
      * FirestoreRecyclerOptions} for configuration options.
@@ -61,6 +62,28 @@ public class ShowProductAdapter extends FirestoreRecyclerAdapter<Product, ShowPr
             email_older_tv = itemView.findViewById(R.id.user_emailTV);
             description_holderTV = itemView.findViewById(R.id.description_holderTV);
             image_holderIV = itemView.findViewById(R.id.image_holderIV);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION && listner!=null)
+                    {
+                        listner.onItemClick(getSnapshots().getSnapshot(position),position);
+                    }
+                }
+            });
         }
+
+    }
+
+    public interface OnItemClickListner{
+        void onItemClick(DocumentSnapshot documentSnapshot , int position);
+    }
+
+
+    public void setOnItemClickListner(OnItemClickListner listner)
+    {
+        this.listner = listner;
+
     }
 }

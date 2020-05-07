@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Confirm_order">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/emailLL"
+        >
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+
+            android:layout_height="match_parent"
+            android:text="Seller"
+            android:textSize="25sp"
+            android:layout_marginEnd="5dp"
+
+            android:padding="5dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="User Email"
+            android:textSize="25sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:id="@+id/user_emailTV"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bodyRL"
+        android:layout_below="@id/emailLL"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTV"
+            android:textSize="25sp"
+            android:text="Title"
+            android:padding="5dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_holderTV"
+            android:layout_toRightOf="@id/titleTV"
+            android:text="Cow"
+            android:textSize="25sp"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/priceTV"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Price (Rs)"
+            android:padding="5dp"
+            android:layout_below="@id/title_holderTV"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/price_holderTV"
+            android:textSize="25sp"
+            android:text="Price"
+            android:padding="5dp"
+            android:layout_below="@id/title_holderTV"
+            android:layout_toRightOf="@id/priceTV"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionTV"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Description"
+            android:layout_below="@id/priceTV"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description_holderTV"
+            android:layout_below="@id/descriptionTV"
+            android:text="Dummy"
+            android:textSize="20sp"
+            android:padding="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone_numberTV"
+            android:layout_below="@id/description_holderTV"
+            android:text="Phone No"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone_number_holderTV"
+            android:layout_below="@id/description_holderTV"
+            android:text="Phone No"
+            android:layout_toRightOf="@id/phone_numberTV"
+            android:textSize="25sp"
+            android:padding="5dp"
+            />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:id="@+id/image_holderIV"
+            android:src="@drawable/tractor_icon"
+            android:layout_below="@id/phone_number_holderTV"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirm_button"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Confirm Order"
+            android:background="@drawable/button_background"
+            android:layout_below="@id/image_holderIV"
+            android:layout_margin="15dp"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
