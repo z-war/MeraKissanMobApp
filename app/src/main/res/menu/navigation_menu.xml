@@ -9,6 +9,8 @@
     <item
         android:id="@+id/show_products"
         android:title="@string/show_produts"></item>
+    <item android:id="@+id/user_orders"
+        android:title="Your Orders"></item>
     <item
         android:id="@+id/log_out"
         android:title="@string/signout"></item>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,14 +47,14 @@ public class ShowProductAdapter extends FirestoreRecyclerAdapter<Product, ShowPr
     @Override
     public AppViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_row, parent, false);
-        AppViewHolder object = new AppViewHolder(row);
-        return object;
+        return new AppViewHolder(row);
     }
 
     class AppViewHolder extends RecyclerView.ViewHolder {
 
         TextView title_holderTV, price_holderTV, description_holderTV , email_older_tv;
         ImageView image_holderIV;
+        Button buy_btn;
 
         public AppViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,7 +63,8 @@ public class ShowProductAdapter extends FirestoreRecyclerAdapter<Product, ShowPr
             email_older_tv = itemView.findViewById(R.id.user_emailTV);
             description_holderTV = itemView.findViewById(R.id.description_holderTV);
             image_holderIV = itemView.findViewById(R.id.image_holderIV);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            buy_btn = itemView.findViewById(R.id.buy_btn);
+            buy_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();

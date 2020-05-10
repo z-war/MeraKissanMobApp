@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -135,9 +136,12 @@ public class Confirm_order extends Fragment {
                   Map<String, Object> order_details = new HashMap<>();
                 order_details.put("OrderBy", curuser.getEmail());
                 order_details.put("OrderFrom", seller_email);
-                order_details.put("CreatedDate", new Date());
+
+                SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                order_details.put("CreatedDate",sfd.format(new Date()).toString() );
                 order_details.put("ProductId", getArguments().getString("ProductId"));
                 order_details.put("OrderStatus", "Unconfirmed");
+                order_details.put("UpdateDate" , "");
                 db.collection("Orders").add(order_details).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {

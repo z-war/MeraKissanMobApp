@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.merakissan.Fragments.Update_Information_Fragment;
 import com.example.merakissan.Fragments.sell_fragment;
+import com.example.merakissan.Fragments.show_orders_for_this_user;
 import com.example.merakissan.Fragments.show_products;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,7 +50,7 @@ public class Home_Screen extends AppCompatActivity {
     private Toolbar toolbar;
     private Fragment update_info;
     private Fragment sell_frag;
-    private Fragment show_products;
+    private Fragment show_products,show_orders;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,7 @@ public class Home_Screen extends AppCompatActivity {
             user_name = header_view.findViewById(R.id.user_nameTV_header);
             profile_pic = header_view.findViewById(R.id.user_profile_picIV_header);
             toolbar.setTitle(R.string.app_name);
+            show_orders = new show_orders_for_this_user();
             sell_frag = new sell_fragment();
             show_products = new show_products();
             muath = FirebaseAuth.getInstance();
@@ -103,6 +105,13 @@ public class Home_Screen extends AppCompatActivity {
                         closedrawer();
 
                         changefrag(sell_frag);
+                        return true;
+                    }
+                    else if(item.getItemId() == R.id.user_orders)
+                    {
+                        closedrawer();
+
+                        changefrag(show_orders);
                         return true;
                     }
                     return false;

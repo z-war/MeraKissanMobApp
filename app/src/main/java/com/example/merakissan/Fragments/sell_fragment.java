@@ -35,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -202,7 +203,8 @@ public class sell_fragment extends Fragment {
                     datamap.put("ProductDescription", descriptionET.getText().toString());
                     datamap.put("ProductPrice", price);
                     datamap.put("CreatedBy", curuser.getEmail());
-                    datamap.put("CreatedAt", new Date());
+                    SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    datamap.put("CreatedAt", sfd.format(new Date()).toString() );
                     if (isimageselected) {
                         String imagename = curuser.getEmail() + "-" + new Date();
                         final StorageReference reference = storageReference.child(imagename);
