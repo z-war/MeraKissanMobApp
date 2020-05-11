@@ -2,6 +2,7 @@ package com.example.merakissan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ public class Home_Screen extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private View header_view;
-    private ImageView profile_pic , cattleIV , tractorIV;
+    private ImageView profile_pic , cattleIV , tractorIV ,FertilizersIV;
     private TextView user_email , cattleTV , tractorTV;
     private TextView user_name;
     private FirebaseAuth muath;
@@ -51,13 +53,16 @@ public class Home_Screen extends AppCompatActivity {
     private Fragment update_info;
     private Fragment sell_frag;
     private Fragment show_products,show_orders;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__screen);
+
         init();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void init() {
         try {
             update_info = new Update_Information_Fragment();
@@ -74,7 +79,12 @@ public class Home_Screen extends AppCompatActivity {
             show_products = new show_products();
             muath = FirebaseAuth.getInstance();
             db = FirebaseFirestore.getInstance();
-
+            cattleIV = findViewById(R.id.livestockIV);
+            cattleIV.setClipToOutline(true);
+            tractorIV = findViewById(R.id.equipmentIV);
+            tractorIV.setClipToOutline(true);
+            FertilizersIV = findViewById(R.id.fertilizersIV);
+            FertilizersIV.setClipToOutline(true);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {

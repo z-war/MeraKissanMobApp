@@ -24,80 +24,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar" />
+
         <RelativeLayout
+            android:id="@+id/RL1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/RL1"
-            android:layout_below="@id/fragment_holder"
-            >
+            android:layout_below="@id/fragment_holder">
+
             <RelativeLayout
+                android:id="@+id/bodyRL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bodyRL"
-                android:padding="20dp"
+
                 >
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/livestockIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/round_border_home_screen_elements"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_screen_livestock_background" />
+
+                <TextView
+                    android:id="@+id/cattleTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false"
-                    >
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="90dp"
+                    android:text="@string/livestock"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
 
-                        android:layout_height="wrap_content"
-                        android:id="@+id/cattle_Rl"
-                        android:padding="10dp">
-                        <ImageView
-                            android:layout_marginStart="25dp"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:id="@+id/cow_ic_IV"
-                            android:contentDescription="@string/livestock"
-                            android:src="@drawable/cow_icon">
+                <ImageView
+                    android:id="@+id/equipmentIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_below="@id/livestockIV"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/round_border_home_screen_elements"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_screen_equipment_background" />
 
-                        </ImageView>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/cow_ic_TV"
-                            android:layout_below="@id/cow_ic_IV"
-                            android:textSize="25sp"
-                            android:gravity="center"
-                            android:text="@string/livestock"></TextView>
-                    </RelativeLayout>
-                    <RelativeLayout
+                <TextView
+                    android:id="@+id/tractorTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="235dp"
+                    android:text="Equipment"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        >
+                <ImageView
+                    android:id="@+id/fertilizersIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_below="@id/equipmentIV"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/round_border_home_screen_elements"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fertilizers_backgorund" />
 
-                        <ImageView
-                            android:layout_marginStart="25dp"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:id="@+id/tractor_ic_IV"
-                            android:contentDescription="@string/machinery"
-                            android:src="@drawable/tractor_icon"/>
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tractor_ic_TV"
-                            android:layout_below="@id/tractor_ic_IV"
-                            android:textSize="25sp"
-                            android:gravity="center"
-                            android:text="Equipment"></TextView>
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
+                <TextView
+                    android:id="@+id/fertilizersTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="385dp"
+                    android:text="Fertilizers"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
 
             </RelativeLayout>
 

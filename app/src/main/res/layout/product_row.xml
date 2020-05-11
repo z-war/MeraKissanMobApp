@@ -109,8 +109,9 @@
 
         <ImageView
             android:id="@+id/image_holderIV"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
             android:layout_below="@id/description_holderTV"
             android:layout_centerHorizontal="true"
             android:src="@drawable/tractor_icon" />
