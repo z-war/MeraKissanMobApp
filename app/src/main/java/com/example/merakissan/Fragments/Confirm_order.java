@@ -65,10 +65,13 @@ public class Confirm_order extends Fragment {
         try {
             nameTV = frag.findViewById(R.id.user_emailTV);
             titleTV = frag.findViewById(R.id.title_holderTV);
+
             priceTV = frag.findViewById(R.id.price_holderTV);
             descriptionTV = frag.findViewById(R.id.description_holderTV);
+
             product_imageView = frag.findViewById(R.id.image_holderIV);
             db = FirebaseFirestore.getInstance();
+
             storageReference = FirebaseStorage.getInstance().getReference();
             muath = FirebaseAuth.getInstance();
             curuser = muath.getCurrentUser();
@@ -129,8 +132,8 @@ public class Confirm_order extends Fragment {
     private void confirmOrder() {
         try {
             if (curuser.getEmail().equals(seller_email)) {
-                Toast.makeText(getContext(), "Please Select Another product you can not buy what you are selling", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getContext(), "Please Select Another product you can not buy what you are selling", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
 
             } else {
                   Map<String, Object> order_details = new HashMap<>();

@@ -8,9 +8,8 @@
         android:id="@+id/buy_btn"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="5dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/button_background"
         android:text="Buy"
         android:textSize="18sp"
@@ -18,6 +17,7 @@
 
     <LinearLayout
         android:id="@+id/emailLL"
+        android:layout_below="@id/image_holderIV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -107,17 +107,17 @@
             android:text="Dummy"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/image_holderIV"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:layout_below="@id/description_holderTV"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/tractor_icon" />
+
 
 
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/image_holderIV"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
 
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/tractor_icon" />
 
 </RelativeLayout>

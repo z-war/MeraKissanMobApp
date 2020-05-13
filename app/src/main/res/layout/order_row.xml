@@ -34,9 +34,10 @@
         android:layout_width="match_parent"
         android:layout_below="@id/order_statusTV"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/button_background"
-        android:text="Confirm"
+        android:text="Show"
         android:textSize="18sp"
         android:textStyle="italic" />
 

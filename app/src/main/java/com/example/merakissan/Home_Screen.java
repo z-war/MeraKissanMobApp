@@ -81,8 +81,26 @@ public class Home_Screen extends AppCompatActivity {
             db = FirebaseFirestore.getInstance();
             cattleIV = findViewById(R.id.livestockIV);
             cattleIV.setClipToOutline(true);
+            cattleIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle data = new Bundle();
+                    data.putString("ProductType" , "LiveStock");
+                    show_products.setArguments(data);
+                    changefrag(show_products);
+                }
+            });
             tractorIV = findViewById(R.id.equipmentIV);
             tractorIV.setClipToOutline(true);
+            tractorIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle data = new Bundle();
+                    data.putString("ProductType" , "Equipment");
+                    show_products.setArguments(data);
+                    changefrag(show_products);
+                }
+            });
             FertilizersIV = findViewById(R.id.fertilizersIV);
             FertilizersIV.setClipToOutline(true);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -95,6 +113,10 @@ public class Home_Screen extends AppCompatActivity {
                         startActivity(new Intent(getBaseContext(), MainActivity.class));
                     } else if (item.getItemId() == R.id.show_products) {
                         closedrawer();
+                        Bundle data = new Bundle();
+                        data.putString("ProductType" , "any");
+                        show_products.setArguments(data);
+                        changefrag(show_products);
                         changefrag(show_products);
                     } else if (item.getItemId() == R.id.update_user_details) {
                         closedrawer();

@@ -1,7 +1,9 @@
 package com.example.merakissan.Fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.merakissan.Adapters.ShowProductAdapter;
 import com.example.merakissan.Models.Product;
@@ -27,9 +30,11 @@ public class show_products extends Fragment {
     private FirebaseFirestore db;
     private View frag;
     private Fragment confirmOrder;
+    private Toolbar toolbar;
     public show_products() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -37,6 +42,9 @@ public class show_products extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         frag = inflater.inflate(R.layout.fragment_show_products, container, false);
+
+
+
         init();
         return frag;
     }
@@ -46,7 +54,19 @@ public class show_products extends Fragment {
             db = FirebaseFirestore.getInstance();
             recyclerView = frag.findViewById(R.id.show_productsRV);
             confirmOrder = new Confirm_order();
-            Fill_RecyclerView();
+            String ProductType = getArguments().getString("ProductType");
+            if(ProductType.equals("LiveStock"))
+            {
+
+                FillRVwithLiveStock();
+
+            }else if(ProductType.equals("Equipment"))
+            {
+                FillRVwithEquipment();
+            }else
+            {
+                Fill_RecyclerView();
+            }
 
 
         } catch (Exception e) {
@@ -59,6 +79,72 @@ public class show_products extends Fragment {
         try {
 
             Query query = db.collection("Products");
+            FirestoreRecyclerOptions<Product> options;
+            options= new FirestoreRecyclerOptions.Builder<Product>().setQuery(query,Product.class).build();
+            showProductAdapter = new ShowProductAdapter(options);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(showProductAdapter);
+            showProductAdapter.setOnItemClickListner(new ShowProductAdapter.OnItemClickListner() {
+                @Override
+                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                    Product product = documentSnapshot.toObject(Product.class);
+                    String id = documentSnapshot.getId();
+                    Bundle product_data = new Bundle();
+                    product_data.putString("Email" , product.getCreatedBy());
+                    product_data.putString("Price" , Integer.toString(product.getProductPrice()));
+                    product_data.putString("ImageUri" , product.getImageUri());
+                    product_data.putString("Title",product.getProductTitle());
+                    product_data.putString("Description",product.getProductDescription());
+                    product_data.putString("ProductId" , id);
+                    confirmOrder.setArguments(product_data);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_holder,confirmOrder).commit();
+                }
+            });
+        }catch (Exception e)
+        {
+            Toast.makeText(getActivity(), "error loading items in recycler view"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void FillRVwithLiveStock()
+    {
+        try {
+
+            Query query = db.collection("Products").whereEqualTo("ProductType","LiveStock");
+            FirestoreRecyclerOptions<Product> options;
+            options= new FirestoreRecyclerOptions.Builder<Product>().setQuery(query,Product.class).build();
+            showProductAdapter = new ShowProductAdapter(options);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(showProductAdapter);
+            showProductAdapter.setOnItemClickListner(new ShowProductAdapter.OnItemClickListner() {
+                @Override
+                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                    Product product = documentSnapshot.toObject(Product.class);
+                    String id = documentSnapshot.getId();
+                    Bundle product_data = new Bundle();
+                    product_data.putString("Email" , product.getCreatedBy());
+                    product_data.putString("Price" , Integer.toString(product.getProductPrice()));
+                    product_data.putString("ImageUri" , product.getImageUri());
+                    product_data.putString("Title",product.getProductTitle());
+                    product_data.putString("Description",product.getProductDescription());
+                    product_data.putString("ProductId" , id);
+                    confirmOrder.setArguments(product_data);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_holder,confirmOrder).commit();
+                }
+            });
+        }catch (Exception e)
+        {
+            Toast.makeText(getActivity(), "error loading items in recycler view"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void FillRVwithEquipment()
+    {
+        try {
+
+            Query query = db.collection("Products").whereEqualTo("ProductType","Equipment");
             FirestoreRecyclerOptions<Product> options;
             options= new FirestoreRecyclerOptions.Builder<Product>().setQuery(query,Product.class).build();
             showProductAdapter = new ShowProductAdapter(options);

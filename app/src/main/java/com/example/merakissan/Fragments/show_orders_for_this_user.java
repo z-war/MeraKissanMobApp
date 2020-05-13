@@ -3,6 +3,7 @@ package com.example.merakissan.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class show_orders_for_this_user extends Fragment {
     FirebaseFirestore db;
     FirebaseAuth muath;
     FirebaseUser curuser;
+    Fragment complete_orders;
     ShowOrdersAdapter showOrdersAdapter;
 
     public show_orders_for_this_user() {
@@ -51,6 +53,7 @@ public class show_orders_for_this_user extends Fragment {
                 db = FirebaseFirestore.getInstance();
                 muath = FirebaseAuth.getInstance();
                 curuser = muath.getCurrentUser();
+                complete_orders = new complete_orders_or_delete_orders();
                 FillRecyclerView();
             }catch (Exception e)
             {
@@ -61,7 +64,7 @@ public class show_orders_for_this_user extends Fragment {
         private void FillRecyclerView()
         {
             try {
-                Query query = db.collection("Orders").whereEqualTo("OrderFrom" ,curuser.getEmail() );
+                Query query = db.collection("Orders").whereEqualTo("OrderFrom" ,curuser.getEmail() ).whereEqualTo("OrderStatus","Unconfirmed");
                 FirestoreRecyclerOptions<Orders> options ;
                 options = new FirestoreRecyclerOptions.Builder<Orders>().setQuery(query,Orders.class).build();
                 showOrdersAdapter = new ShowOrdersAdapter(options);
@@ -70,7 +73,14 @@ public class show_orders_for_this_user extends Fragment {
                 showOrdersAdapter.setOnItemClickListner(new ShowOrdersAdapter.OnItemClickListner() {
                     @Override
                     public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                        Toast.makeText(getActivity(), "button Clicked", Toast.LENGTH_SHORT).show();
+                        Orders orders = documentSnapshot.toObject(Orders.class);
+                        Bundle data  = new Bundle();
+                        data.putString("BuyerEmail" , orders.getOrderBy());
+                        data.putString("ProductId" , orders.getProductId());
+                        data.putString("OrderDate" , orders.getCreatedDate());
+                        complete_orders.setArguments(data);
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_holder,complete_orders).commit();
+
                     }
                 });
             }catch (Exception e)

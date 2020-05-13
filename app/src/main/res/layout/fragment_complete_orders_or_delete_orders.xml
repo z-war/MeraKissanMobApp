@@ -5,10 +5,83 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.complete_orders_or_delete_orders">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/buyerNameTV"
+          android:text="Buyer name"
+          android:textSize="25sp"
+          android:padding="5dp"
+          />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/buyerPhoneTV"
+          android:text="Buyer Phone No"
+          android:layout_below="@id/buyerNameTV"
+          android:textSize="25sp"
+          android:padding="5dp"
+          />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/productTitleTV"
+          android:text="Product title"
+          android:layout_below="@id/buyerPhoneTV"
+          android:textSize="25sp"
+          android:padding="5dp"
+          />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/ProductPriceTV"
+          android:text="Price"
+          android:layout_below="@id/productTitleTV"
+          android:textSize="25sp"
+          android:padding="5dp"
+          />
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/OrderDateTV"
+          android:text="Date"
+          android:layout_below="@id/ProductPriceTV"
+          android:textSize="25sp"
+          android:padding="5dp"
+          />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/OrderDateTV"
+          android:orientation="horizontal">
+          <Button
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="wrap_content"
+              android:id="@+id/ConfirmBTN"
+              android:text="Confirm"
+
+              android:layout_margin="15dp"
+              android:background="@drawable/button_background"
+              />
+          <Button
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="wrap_content"
+              android:id="@+id/Cancelbtn"
+              android:text="Cancel"
+              android:layout_margin="15dp"
+              android:background="@drawable/button_background"
+              />
+
+      </LinearLayout>
+  </RelativeLayout>
 
 </FrameLayout>

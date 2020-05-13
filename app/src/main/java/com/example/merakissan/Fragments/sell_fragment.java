@@ -218,7 +218,7 @@ public class sell_fragment extends Fragment {
 
                                 }
 
-                                return reference.getDownloadUrl();
+                                    return reference.getDownloadUrl();
                             }
                         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
